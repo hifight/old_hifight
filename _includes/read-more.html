@@ -1,0 +1,30 @@
+<div class="read-more">
+
+{% if page.lang == 'jp' %}
+{% assign posts=site.related_posts | where:"lang", "jp" %}
+{% else %}
+{% assign posts=site.related_posts | where:"lang", "th" %}
+{% endif %}
+  {% for post in posts limit:1 %}
+    <div class="read-more-header">
+      <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }} class="read-more-btn">Read More</a>
+    </div><!-- /.read-more-header -->
+    <div class="read-more-content">
+		<div class="read-more-img">
+			<a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}"><img src="{{ site.url }}/images/{{ post.image.feature }}" alt="{{ post.title }}"></a>
+			<a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}"><h3><span>{{ post.title }}</span></h3></a>
+		</div>
+	  <p>{% if post.description %}{{ post.description }}{% endif %} </p>
+		
+	  <p><a href="{{ site.url }}{{ post.url }}">Continue reading</a></p>
+    </div><!-- /.read-more-content -->
+  {% endfor %}
+  <div class="read-more-list">
+    {% for post in posts limit:2 offset:1 %}
+      <div class="list-item">
+        <h4><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h4>
+        <span>Published on {{ post.date | date: "%B %d, %Y" }}</span>
+      </div><!-- /.list-item -->
+    {% endfor %}
+  </div><!-- /.read-more-list -->
+</div><!-- /.read-more -->

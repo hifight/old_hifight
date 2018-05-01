@@ -1,0 +1,111 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ page.categories[0] }}"><!--<![endif]-->
+<head>
+{% include head.html %}
+</head>
+
+<body id="post" {% if page.image.feature %}class="feature"{% endif %}>
+
+{% include google.html %}
+{% include browser-upgrade.html %}
+{% include navigation.html %}
+
+{% if page.image.feature %}
+<div class="entry-header">
+	{% if page.image.credit %}<div class="image-credit">Image source: {% if page.image.creditlink %}<a href="{{ page.image.creditlink }}">{% endif %}{{ page.image.credit }}{% if page.image.creditlink %}</a>{% endif %}</div><!-- /.image-credit -->{% endif %}
+    <div class="entry-image" alt="{{ page.title }}" style="background-image: url('{{ site.url }}/images/{{ page.image.feature }}');">
+		<div class="header-title">
+			<div class="header-title-wrap">
+				<h1>{{ page.title }}</h1>
+				<h2>{{ page.description }}</h2>
+			</div><!-- /.header-title-wrap -->
+		</div><!-- /.header-title -->
+	</div><!-- /.entry-image -->
+</div><!-- /.entry-header -->
+{% endif %}
+
+<div id="main" role="main">
+  <article class="hentry">
+	<header>
+	</header>
+	
+    <div class="entry-content">
+		{{ content }}
+		
+		{% for paragraph in page.content-description %}
+			<p>{{ paragraph }}</p>
+		{% endfor %}
+		<!-- /.Highlight Loop -->
+		{% for highlight in page.highlights %}
+		<hr />
+			<h2 id="heading-2">Highlight {{ forloop.index }}: {{ highlight.title }}</h2>
+
+			{% for paragraph in highlight.content %}
+				<p>{{ paragraph }}</p>
+				
+			{% endfor %}
+			{% if highlight.gfy %}
+					<figure class="entry-gfy"><div class="gfyitem" data-id="{{ highlight.gfy }}" data-expand="true" data-autoplay="false"/></figure>	
+			{% endif %}
+			{% if highlight.gfy2 %}
+					<figure class="entry-gfy"><div class="gfyitem" data-id="{{ highlight.gfy2 }}" data-expand="true" data-autoplay="false"/></figure>	
+			{% endif %}
+			{% if highlight.gfy3 %}
+					<figure class="entry-gfy"><div class="gfyitem" data-id="{{ highlight.gfy3 }}" data-expand="true" data-autoplay="false"/></figure>	
+			{% endif %}
+			{% if highlight.gfy4 %}
+					<figure class="entry-gfy"><div class="gfyitem" data-id="{{ highlight.gfy4 }}" data-expand="true" data-autoplay="false"/></figure>	
+			{% endif %}
+			
+		{% endfor %}
+		<!-- /.Highlight Loop End -->
+		<hr />
+		
+		{% if page.youtube-source %}
+		<p><em>Source:</em></p>
+		<p><iframe width="560" height="315" src="//www.youtube.com/embed/{{ page.youtube-source }}" frameborder="0"> </iframe></p>
+		{% endif %}
+		
+		{% if page.youtube-source2 %}
+		<p><iframe width="560" height="315" src="//www.youtube.com/embed/{{ page.youtube-source2 }}" frameborder="0"> </iframe></p>
+		{% endif %}
+		
+		{% if page.youtube-source3 %}
+		<p><iframe width="560" height="315" src="//www.youtube.com/embed/{{ page.youtube-source3 }}" frameborder="0"> </iframe></p>
+		{% endif %}
+		
+		{% if page.youtube-source4 %}
+		<p><iframe width="560" height="315" src="//www.youtube.com/embed/{{ page.youtube-source4 }}" frameborder="0"> </iframe></p>
+		{% endif %}
+
+      <footer class="entry-meta">
+        <span class="entry-tags">{% for tag in page.tags %}<a href="{{ site.url }}/tags/#{{ tag }}" title="Pages tagged {{ tag }}" class="tag"><span class="term">{{ tag }}</span></a>{% unless forloop.last %}{% endunless %}{% endfor %}</span>
+        <span>Published on <span class="entry-date date updated"><time datetime="{{ page.date }}">{{ page.date | date: "%B %d, %Y" }}</time></span></span></span>
+        {% if page.share != false %}{% include social-share.html %}{% endif %}
+      </footer>
+    </div><!-- /.entry-content -->
+    {% if page.comments != false %}<section id="disqus_thread"></section><!-- /#disqus_thread -->{% endif %}
+    {% if site.related_posts.size > 0 %}{% include read-more.html %}{% endif %}
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    {% include footer.html %}
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<div class="language-select">
+{% assign posts=site.posts | where:"postid", page.postid | sort: 'path' %}
+{% for post in posts %}
+	<a href="{{ post.url }}" class="{{ post.categories[0] }} language-text"> {{ post.categories[0] | upcase }}  </a>
+{% endfor %}
+</div><!-- /.language-select -->
+
+{% include scripts.html %}	        
+
+</body>
+</html>
